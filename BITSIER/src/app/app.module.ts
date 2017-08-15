@@ -1,10 +1,14 @@
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { BITSIERPage } from '../pages/b-itsier/b-itsier';
+import { BITSIER2Page } from '../pages/b-itsier2/b-itsier2';
+import { SearchItemsPage } from '../pages/search-items/search-items';
+import { FeedbackPage } from '../pages/feedback/feedback';
+import { PagePage } from '../pages/page/page';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -13,17 +17,25 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    BITSIERPage,
+    BITSIER2Page,
+    SearchItemsPage,
+    FeedbackPage,
+    PagePage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    BITSIERPage,
+    BITSIER2Page,
+    SearchItemsPage,
+    FeedbackPage,
+    PagePage
   ],
   providers: [
     StatusBar,
