@@ -1,1 +1,1 @@
-# A utility app
+# A utility app for Bitsians
