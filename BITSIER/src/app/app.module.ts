@@ -1,4 +1,4 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler,NgZone } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -8,6 +8,7 @@ import { BITSIER2Page } from '../pages/b-itsier2/b-itsier2';
 import { SearchItemsPage } from '../pages/search-items/search-items';
 import { FeedbackPage } from '../pages/feedback/feedback';
 import { PagePage } from '../pages/page/page';
+import { GooglePlus } from '@ionic-native/google-plus';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -39,6 +40,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   providers: [
     StatusBar,
+    GooglePlus,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

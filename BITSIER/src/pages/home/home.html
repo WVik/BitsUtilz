@@ -1,8 +1,8 @@
 <ion-content id="page1" style="background-color:#FFD322;">
   <div class="spacer" style="width:320px;height:20px;" id="home-spacer2"></div>
-  <h3 id="home-heading2" style="color:#1561C2;font-weight:lighter;text-align:center;">
+  <h2 id="home-heading2" style="color:#1561C2;font-weight:lighter;text-align:center;">
     WELCOME TO
-  </h3>
+  </h2>
   <h1 id="home-heading1" style="color:#1561C2;text-align:center;">
     BITSIER
   </h1>
@@ -10,17 +10,24 @@
     <img src="assets/img/hSditu4WQNSeQluGdgVE_v0mPcfZ9QtekyTfmVkz4_BITSLogo.png" style="display:block;width:60%;height:auto;margin-left:auto;margin-right:auto;" />
   </div>
   <div class="spacer" style="width:320px;height:44px;" id="home-spacer3"></div>
-  <div class="spacer" style="width:320px;height:9px;" id="home-spacer5"></div>
-  <button id="home-button5" ion-button color="positive" full icon-left on-click="goToBITSIER()">
+  <ion-item *ngIf="userProfile">
+  <ion-avatar item-left>
+    <img [src]="userProfile.photoURL">
+  </ion-avatar>
+  <h2>{{ userProfile.displayName }}</h2>
+  <h3>{{ userProfile.email }}</h3>
+</ion-item>
+  <button id="home-button5" ion-button color="positive" full icon-left on-click="goToBITSIER()" *ngIf="userProfile">
     <ion-icon name="log-in"></ion-icon>
     Login
   </button>
-  <button id="home-button4" ion-button color="assertive" full icon-left>
-    <ion-icon name="google"></ion-icon>
+  <div class="spacer" style="width:320px;height:20px;" id="home-spacer5"></div>
+  <button id="home-button4" ion-button color="danger" (click)="login()" full icon-left *ngIf="!userProfile">
+    <ion-icon name="logo-googleplus"></ion-icon>
     Sign Up
   </button>
-  <div class="spacer" style="width:320px;height:17px;" id="home-spacer6"></div>
+  <div class="spacer" style="width:320px;height:50px;" id="home-spacer6"></div>
   <h5 id="home-heading3" style="color:#FF0063;font-weight:lighter;text-align:center;">
-    With Love From BITS Pilani
+    With ♥ For BITS Pilani
   </h5>
 </ion-content>

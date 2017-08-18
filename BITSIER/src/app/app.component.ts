@@ -10,6 +10,7 @@ import { BITSIERPage } from '../pages/b-itsier/b-itsier';
 
 
 import { HomePage } from '../pages/home/home';
+import firebase from 'firebase';
 
 
 
@@ -21,6 +22,14 @@ export class MyApp {
     rootPage:any = HomePage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+    firebase.initializeApp({
+    apiKey: "AIzaSyBCSbRLl0TZt99tofQ41jX6C1M2R0Znke8",
+    authDomain: "habits-ba4e1.firebaseapp.com",
+    databaseURL: "https://habits-ba4e1.firebaseio.com",
+    storageBucket: "habits-ba4e1",
+    messagingSenderId: "338909074075"
+  });
+  
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

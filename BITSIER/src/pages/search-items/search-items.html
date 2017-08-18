@@ -3,6 +3,8 @@
     <ion-searchbar placeholder="Search For Items " name="shopSearch" id="searchItems-search2"></ion-searchbar>
     <div class="spacer" style="width:300px;height:19px;" id="searchItems-spacer8"></div>
 <ion-list>
+
+ <ion-item-sliding #item>
     <ion-item color="none" id="searchItems-list-item24">
       <ion-thumbnail item-left>
         <img src="assets/img/DbYLYSkqS9Ct4yLeWG9P_ouroboros-dock.png" />
@@ -13,6 +15,15 @@
       <p> The Oborus 2.0 by Razer. Brand new condition without the packaging. </p>
       <span> <h4> Extra Information </h4> </span>
     </ion-item>
+    <ion-item-options side="left">
+      <button ion-button color="danger" (click)="a">Hide</button>
+    </ion-item-options>
+
+    <ion-item-options side="right">
+      <button ion-button (click)="a">Add to Wishlist</button>
+    </ion-item-options>
+  </ion-item-sliding>
+
     <div class="spacer" style="width:300px;height:19px;" id="searchItems-spacer12"></div>
     <ion-item color="none" id="searchItems-list-item25">
       <ion-thumbnail item-left>

@@ -1,0 +1,52 @@
+{
+  "project_info": {
+    "project_number": "944014234886",
+    "project_id": "habits-f7424"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944014234886:android:b876ea8c19aa5f00",
+        "android_client_info": {
+          "package_name": "com.bits.habits"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944014234886-f3paf8f3tr5iibqur8t8offm94u5hcit.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "944014234886-bes0ph00rkh4lsrf11nqcj852jtqd6fc.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "944014234886-3hmhl306d3849rpl5acbeovjevmp7i25.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bits.habits",
+            "certificate_hash": "7391a4d851c24c6a676e9c83727d28e9ec40c035"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYU9NAcG5OdbyvzTxQCcO1FNAXh0uYqXc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
