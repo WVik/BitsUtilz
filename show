@@ -1,0 +1,4 @@
+MongoDB shell version: 2.6.5
+connecting to: dbs
+2017-08-22T15:50:29.393+0530 warning: Failed to connect to 127.0.0.1:27017, reason: errno:61 Connection refused
+2017-08-22T15:50:29.394+0530 Error: couldn't connect to server 127.0.0.1:27017 (127.0.0.1), connection attempt failed at src/mongo/shell/mongo.js:146
