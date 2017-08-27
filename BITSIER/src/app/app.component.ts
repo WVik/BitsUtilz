@@ -19,7 +19,7 @@ import firebase from 'firebase';
 })
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
-    rootPage:any = HomePage;
+    rootPage:any = BITSIERPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     firebase.initializeApp({
@@ -29,7 +29,7 @@ export class MyApp {
     storageBucket: "habits-ba4e1",
     messagingSenderId: "338909074075"
   });
-  
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

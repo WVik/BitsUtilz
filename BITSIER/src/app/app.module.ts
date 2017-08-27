@@ -13,6 +13,9 @@ import { GooglePlus } from '@ionic-native/google-plus';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { ItemsProvider } from '../providers/items/items';
+import { NewsProvider } from '../providers/news/news';
+import { UserProvider } from '../providers/user/user';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusBar,
     GooglePlus,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ItemsProvider,
+    NewsProvider,
+    UserProvider
   ]
 })
 export class AppModule {}
