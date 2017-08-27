@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 
-mongoose.connect('mongodb://localhost/BitsUtilz');
+mongoose.connect('mongodb://localhost/bitsaa');
 app.use(bodyParser.urlencoded({'extended':'true'}));
 
 var Review = new mongoose.Schema({
@@ -15,20 +15,43 @@ var Review = new mongoose.Schema({
   rating:Number
 });
 
+
+
 var Item = mongoose.model('Item', {
     title: String,
     description: String,
     price: Number,
     date_posted: String,
     views: Number,
-    reviews:[{type: mongoose.Schema.ObjectId, ref: 'Review'} ]
+    reviews:[{type: mongoose.Schema.ObjectId, ref: 'Review'} ],
+    id: String
 });
 
 var User = mongoose.model('User', {
   name: String,
   id: String,
   uid: String,
+  email: String,
+  allItems: [String],
+  currentItems: [String],
+  picture: String,
+  address: String,
+  wishlist: [String],
+  clubAccess: [String],
+  favourites: [String]
 });
+
+
+var testItem = Item({title: "Bose Headphones", description:"Brand new Headphones",price:"5550", date_posted:"27-07-17"}).save(function(err){
+  if(err) throw err;
+  console.log("Item saved!");
+});
+
+var testUser = User({name: "Achal", id:"2015B4A7436P", adress:"VK", uid:"001"}).save(function(err){
+  if(err) throw err;
+  console.log("Item saved!");
+});
+
 
 var NewsItem = mongoose.model('NewsItem', {
   title: String,
@@ -38,31 +61,56 @@ var NewsItem = mongoose.model('NewsItem', {
   id: String
 });
 
-/*app.get('/items', function(req,res){
-  Item.find({},function(data))
-
-
-  // There's a module for Images which we can use.
-})
-*/
 
 //This request handles the profile of the user.
 app.get('/userinfo/:uid', function(req,res){
-  if(err)
-    res.send(err);
+  var user = User.findOne({'uid': req.params.uid},function(err,user){
+    if(err)
+      throw err;
+    console.log(user);
+    res.json(user);
+  });
+})
 
-  var user = User.find({uid: req.params.uid});
-  var userData = {'name':user.name, 'id':user.id};
-  res.send(json.stringify(userData));
+//Request handler to show all listed items in the database
+app.get('/items',function(req,res){
+  var items = Item.find({ },function(err,items){
+    if(err)
+      throw err;
 
+    res.json(items);
+  })
+})
+
+//Request handler to show all news items in the database
+app.get('/news',function(req,res){
+  var news = NewsItem.find({}, function(err,news){
+    if(err)
+      throw err;
+    res.json(news);
+  })
+})
+
+app.get('/news/:uid',function(req,res){
+  var uid = req.params.uid;
+  var user = User.find({'uid':uid},function(err,user){
+      var favourites = user.favourites;
+      res.json(favourites);
+  })
 })
 
 
 
 app.get('/uploads/items/:id', function(req,res){
   var id = req.params.id;
-  res.sendFile('./img/images/'+id);
+  res.sendFile(__dirname+'/img/images/'+id+'.png');
+})
 
+
+
+
+app.get('/test',function(req,res){
+  res.send("Hello!");
 })
 
 app.listen(8500);
