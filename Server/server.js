@@ -42,12 +42,12 @@ var User = mongoose.model('User', {
 });
 
 
-var testItem = Item({title: "Bose Headphones", description:"Brand new Headphones",price:"5550", date_posted:"27-07-17"}).save(function(err){
+var testItem = Item({title: "Bose Headphones", description:"Brand new Headphones",price:"5550", date_posted:"27-07-17", id:"001"}).save(function(err){
   if(err) throw err;
   console.log("Item saved!");
 });
 
-var testUser = User({name: "Achal", id:"2015B4A7436P", adress:"VK", uid:"001"}).save(function(err){
+var testUser = User({name: "Vikram", id:"2015B4A7436P", adress:"VK", uid:"012",favourites:["001"] }).save(function(err){
   if(err) throw err;
   console.log("Item saved!");
 });
@@ -73,11 +73,10 @@ app.get('/userinfo/:uid', function(req,res){
 })
 
 //Request handler to show all listed items in the database
-app.get('/items',function(req,res){
+app.get('/items/',function(req,res){
   var items = Item.find({ },function(err,items){
     if(err)
       throw err;
-
     res.json(items);
   })
 })
@@ -93,9 +92,21 @@ app.get('/news',function(req,res){
 
 app.get('/news/:uid',function(req,res){
   var uid = req.params.uid;
-  var user = User.find({'uid':uid},function(err,user){
+  var newsArray = [];
+  var user = User.findOne({'uid':uid},function(err,user){
       var favourites = user.favourites;
-      res.json(favourites);
+      console.log(favourites);
+      favourites.forEach(function(favourite){
+        Item.findOne({'id':favourite},function(err,item){
+          newsArray.push(item.id);
+          //console.log(newsArray);
+
+
+        })
+        res.send(newsArray);
+
+      })
+      //console.log(newsArray);
   })
 })
 
