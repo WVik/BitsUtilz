@@ -10,6 +10,8 @@ import { FeedbackPage } from '../pages/feedback/feedback';
 import { PagePage } from '../pages/page/page';
 import { GooglePlus } from '@ionic-native/google-plus';
 
+import { Http } from '@angular/http';
+import { HttpModule } from '@angular/http';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -29,6 +31,7 @@ import { UserProvider } from '../providers/user/user';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
