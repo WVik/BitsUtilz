@@ -8,10 +8,9 @@ mongoose.connect('mongodb://localhost/bitsaa');
 app.use(bodyParser.urlencoded({'extended':'true'}));
 
 var Review = new mongoose.Schema({
-  timestamp:Date,
+  date:Date,
   user:String,
-  item:String,
-  response:Stdatering,
+  response:String,
   isPositive:Boolean,
   rating:Number
 });
@@ -22,27 +21,20 @@ var Item = mongoose.model('Item', {
     title: String,
     description: String,
     price: Number,
-    timestamp : String,
+    date_posted: String,
     views: Number,
-    isListed:Boolean,
     reviews:[{type: mongoose.Schema.ObjectId, ref: 'Review'} ],
-    id: String,
-<<<<<<< HEAD
-    category: String
-=======
-    images: String
->>>>>>> 7a3ec5dd85b0a3e52a955500627d76fc6089a247
+    id: String
 });
 
 var User = mongoose.model('User', {
   name: String,
-  bitsId: String,
+  id: String,
   uid: String,
   email: String,
-  postedItems: [String],
+  allItems: [String],
   currentItems: [String],
   picture: String,
-  //should we keep items as a subcollection of Users or store just the ids of the items, mongo must be effecient if its a relational database
   address: String,
   wishlist: [String],
   clubAccess: [String],
@@ -89,17 +81,6 @@ app.get('/items/',function(req,res){
   })
 })
 
-//Items of particular category
-app.get('/items/category/:category', function(req,res){
-  var items = Item.find({'category':req.params.category},function(err,items){
-    if(err)
-    throw err;
-    res.json(items);
-  }
-})
-
-
-
 //Request handler to show all news items in the database
 app.get('/news',function(req,res){
   var news = NewsItem.find({}, function(err,news){
@@ -108,8 +89,6 @@ app.get('/news',function(req,res){
     res.json(news);
   })
 })
-
-
 
 app.get('/news/:uid',function(req,res){
   var uid = req.params.uid;
@@ -137,7 +116,6 @@ app.get('/uploads/items/:id', function(req,res){
   var id = req.params.id;
   res.sendFile(__dirname+'/img/images/'+id+'.png');
 })
-
 
 
 

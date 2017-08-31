@@ -8,10 +8,9 @@ mongoose.connect('mongodb://localhost/bitsaa');
 app.use(bodyParser.urlencoded({'extended':'true'}));
 
 var Review = new mongoose.Schema({
-  timestamp:Date,
+  date:Date,
   user:String,
-  item:String,
-  response:Stdatering,
+  response:String,
   isPositive:Boolean,
   rating:Number
 });
@@ -22,27 +21,21 @@ var Item = mongoose.model('Item', {
     title: String,
     description: String,
     price: Number,
-    timestamp : String,
+    date_posted: String,
     views: Number,
-    isListed:Boolean,
     reviews:[{type: mongoose.Schema.ObjectId, ref: 'Review'} ],
     id: String,
-<<<<<<< HEAD
     category: String
-=======
-    images: String
->>>>>>> 7a3ec5dd85b0a3e52a955500627d76fc6089a247
 });
 
 var User = mongoose.model('User', {
   name: String,
-  bitsId: String,
+  id: String,
   uid: String,
   email: String,
-  postedItems: [String],
+  allItems: [String],
   currentItems: [String],
   picture: String,
-  //should we keep items as a subcollection of Users or store just the ids of the items, mongo must be effecient if its a relational database
   address: String,
   wishlist: [String],
   clubAccess: [String],

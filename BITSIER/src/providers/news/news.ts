@@ -11,7 +11,8 @@ import {News} from '../../models/news';
 */
 @Injectable()
 export class NewsProvider {
-
+private objectiveNews;
+private test="{'a':'1'}";
   constructor(public http: Http, public user:UserProvider) {
     console.log('Hello NewsProvider Provider');
   }
@@ -24,8 +25,19 @@ getFollowedNews(){
   return favourites.list;
 }
 getObjectiveNews(){
-  let list;
-  return list;
+  if (this.objectiveNews) {
+       return Promise.resolve(this.objectiveNews);
+     }
+
+     return new Promise(resolve => {
+
+       this.http.get('http://172.17.52.86:8500/news/012')
+         .map(res => res.json())
+         .subscribe(data => {
+           this.objectiveNews = data;
+           resolve(this.objectiveNews);
+         });
+     });
 }
 getFilteredNews(parameter:string){
   let list;
