@@ -24,7 +24,8 @@ var Item = mongoose.model('Item', {
     date_posted: String,
     views: Number,
     reviews:[{type: mongoose.Schema.ObjectId, ref: 'Review'} ],
-    id: String
+    id: String,
+    category: String
 });
 
 var User = mongoose.model('User', {
@@ -81,6 +82,17 @@ app.get('/items/',function(req,res){
   })
 })
 
+//Items of particular category
+app.get('/items/category/:category', function(req,res){
+  var items = Item.find({'category':req.params.category},function(err,items){
+    if(err)
+    throw err;
+    res.json(items);
+  }
+})
+
+
+
 //Request handler to show all news items in the database
 app.get('/news',function(req,res){
   var news = NewsItem.find({}, function(err,news){
@@ -89,6 +101,8 @@ app.get('/news',function(req,res){
     res.json(news);
   })
 })
+
+
 
 app.get('/news/:uid',function(req,res){
   var uid = req.params.uid;
@@ -116,6 +130,7 @@ app.get('/uploads/items/:id', function(req,res){
   var id = req.params.id;
   res.sendFile(__dirname+'/img/images/'+id+'.png');
 })
+
 
 
 
