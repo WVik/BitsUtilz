@@ -3,15 +3,40 @@ var app = express();
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var fs = require('fs');
+var multer = require('multer');
+var path = require('path');
+
+
+// When making a post request to uploads, we can generate an ID for that item, and save it by that name. At the same time, the
+// same ID will be added to the item database and the user db as well. 
+app.use('/upload/:uid',function(req,res,next){
+  req.filename = req.params.uid;
+  next();
+})
+
+var storage = multer.diskStorage({
+	destination: function(req, file, callback) {
+
+		callback(null, __dirname+'/img/images')
+	},
+	filename: function(req, file, callback) {
+    var name = req.filename + '-' + Date.now()+ path.extname(file.originalname);
+
+		callback(null, name)
+	}
+})
+
+var upload = multer({storage:storage}).single('image');
 
 mongoose.connect('mongodb://localhost/bitsaa');
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'true'}));
 
 var Review = new mongoose.Schema({
   timestamp:Date,
   user:String,
   item:String,
-  response:Stdatering,
+  response:String,
   isPositive:Boolean,
   rating:Number
 });
@@ -27,11 +52,9 @@ var Item = mongoose.model('Item', {
     isListed:Boolean,
     reviews:[{type: mongoose.Schema.ObjectId, ref: 'Review'} ],
     id: String,
-<<<<<<< HEAD
-    category: String
-=======
-    images: String
->>>>>>> 7a3ec5dd85b0a3e52a955500627d76fc6089a247
+    category: String,
+    images: String,
+    type: Number
 });
 
 var User = mongoose.model('User', {
@@ -55,7 +78,7 @@ var testItem = Item({title: "Bose Headphones", description:"Brand new Headphones
   console.log("Item saved!");
 });
 
-var testUser = User({name: "Vikram", id:"2015B4A7436P", adress:"VK", uid:"012",favourites:["001"] }).save(function(err){
+var testUser = User({name: "Vikram", id:"2015B4A7436P", adress:"VK", uid:"012",favourites:["001", "002", "003", ""] }).save(function(err){
   if(err) throw err;
   console.log("Item saved!");
 });
@@ -70,6 +93,25 @@ var NewsItem = mongoose.model('NewsItem', {
 });
 
 
+// User Info (Profile) : /userinfo/uid
+// Followed news: /news/uid(of user)
+// All items listed: /items
+// All news items: /news
+
+app.post('/upload/:uid', upload, function(req, res) {
+  if (req.file) {
+    //console.dir(req.file);
+    console.log(req.name);
+    return res.end('Thank you for the file');
+  }
+  res.end('Missing file');
+});
+
+
+
+// --------------------------Users-----------------------------
+
+
 //This request handles the profile of the user.
 app.get('/userinfo/:uid', function(req,res){
   var user = User.findOne({'uid': req.params.uid},function(err,user){
@@ -79,6 +121,18 @@ app.get('/userinfo/:uid', function(req,res){
     res.json(user);
   });
 })
+
+app.post('/followed/:uid/:clubs', function(req,res){
+  clubs = req.body;
+  var user = Users.findOne({'uid' : req.params.uid},function(err, user){
+    if(err)
+      throw err;
+    user.favourites = clubs;
+    })
+})
+
+
+// ----------------------Items---------------------
 
 //Request handler to show all listed items in the database
 app.get('/items/',function(req,res){
@@ -90,15 +144,25 @@ app.get('/items/',function(req,res){
 })
 
 //Items of particular category
-app.get('/items/category/:category', function(req,res){
+/*app.get('/items/category/:category', function(req,res){
   var items = Item.find({'category':req.params.category},function(err,items){
     if(err)
     throw err;
     res.json(items);
   }
 })
+*/
 
 
+
+app.get('/uploads/thumbnails/:id', function(req,res){
+  var id = req.params.id;
+  res.sendFile(__dirname+'/img/images/'+id+'.png');
+})
+
+
+
+// -----------------------News--------------------------
 
 //Request handler to show all news items in the database
 app.get('/news',function(req,res){
@@ -107,9 +171,7 @@ app.get('/news',function(req,res){
       throw err;
     res.json(news);
   })
-})
-
-
+});
 
 app.get('/news/:uid',function(req,res){
   var uid = req.params.uid;
@@ -130,15 +192,6 @@ app.get('/news/:uid',function(req,res){
       //console.log(newsArray);
   })
 })
-
-
-
-app.get('/uploads/items/:id', function(req,res){
-  var id = req.params.id;
-  res.sendFile(__dirname+'/img/images/'+id+'.png');
-})
-
-
 
 
 
