@@ -4,15 +4,17 @@ export class News {
   private source;
   private timestamp;
   private category;
+  private club;
     constructor(    title,
        description,
        source,
        timestamp,
-       category){
+       category,club){
          this.title=title;
          this.description=description;
          this.source=source;
          this.timestamp=timestamp;
          this.category = category;
+         this.club = club;
     }
 }

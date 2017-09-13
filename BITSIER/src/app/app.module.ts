@@ -9,16 +9,17 @@ import { SearchItemsPage } from '../pages/search-items/search-items';
 import { FeedbackPage } from '../pages/feedback/feedback';
 import { PagePage } from '../pages/page/page';
 import { GooglePlus } from '@ionic-native/google-plus';
-
-import { Http } from '@angular/http';
+import { AddItemPage} from '../pages/add-item/add-item';
+import { Http,Headers } from '@angular/http';
 import { HttpModule } from '@angular/http';
-
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ItemsProvider } from '../providers/items/items';
 import { NewsProvider } from '../providers/news/news';
 import { UserProvider } from '../providers/user/user';
-
+import {FollowListPage} from '../pages/follow-list/follow-list';
+import { LoaderProvider } from '../providers/loader/loader';
 @NgModule({
   declarations: [
     MyApp,
@@ -26,7 +27,9 @@ import { UserProvider } from '../providers/user/user';
     BITSIERPage,
     BITSIER2Page,
     SearchItemsPage,
+    AddItemPage,
     FeedbackPage,
+    FollowListPage,
     PagePage
   ],
   imports: [
@@ -42,16 +45,22 @@ import { UserProvider } from '../providers/user/user';
     BITSIER2Page,
     SearchItemsPage,
     FeedbackPage,
+    AddItemPage,
+    FollowListPage,
     PagePage
   ],
   providers: [
     StatusBar,
     GooglePlus,
+    FileTransfer,
+    FileTransferObject,
+    FileTransferObject,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ItemsProvider,
     NewsProvider,
-    UserProvider
+    UserProvider,
+    LoaderProvider
   ]
 })
 export class AppModule {}

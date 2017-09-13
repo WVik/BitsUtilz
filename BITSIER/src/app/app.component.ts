@@ -7,12 +7,12 @@ import { FeedbackPage } from '../pages/feedback/feedback';
 import { SearchItemsPage } from '../pages/search-items/search-items';
 import { BITSIER2Page } from '../pages/b-itsier2/b-itsier2';
 import { BITSIERPage } from '../pages/b-itsier/b-itsier';
-
+import {FollowListPage} from '../pages/follow-list/follow-list';
 
 import { HomePage } from '../pages/home/home';
 import firebase from 'firebase';
 
-
+import{ AddItemPage } from '../pages/add-item/add-item';
 
 @Component({
   templateUrl: 'app.html'
@@ -49,5 +49,9 @@ export class MyApp {
   }goToBITSIER(params){
     if (!params) params = {};
     this.navCtrl.setRoot(BITSIERPage);
+  }
+  goToProfile(params){
+    if(!params) params={};
+    this.navCtrl.setRoot(AddItemPage);
   }
 }

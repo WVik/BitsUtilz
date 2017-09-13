@@ -19,8 +19,50 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page2" style="background-color:#FFD322;">
-<ion-list *ngFor="let news of objectiveNews">
+<ion-content padding id="page2" style="background-color:#D1DBDD;">
+<ion-list >
+  <ion-card>
+
+      <img src="https://technofriends.files.wordpress.com/2008/07/google-test-framework.png"/>
+
+      <ion-card-content>
+        <ion-card-title>
+           sample title
+        </ion-card-title>
+        <ion-row no-padding>
+        <ion-col col-4 text-left>
+        Marty McFly
+      </ion-col>
+      <ion-col text-right>
+
+           <p>November 5, 1955</p>
+         </ion-col>
+       </ion-row>
+        <p>
+      test description
+        </p>
+      </ion-card-content>
+
+      <ion-row no-padding>
+        <ion-col>
+          <button ion-button clear small color="danger" icon-start>
+            <ion-icon name='star'></ion-icon>
+            Like
+          </button>
+        </ion-col>
+        <ion-col text-center>
+
+            {{news.club}}
+        </ion-col>
+        <ion-col text-right>
+          <button ion-button clear small color="danger" icon-start>
+            <ion-icon name='share-alt'></ion-icon>
+            Share
+          </button>
+        </ion-col>
+      </ion-row>
+
+    </ion-card>
 
       <ion-card id="bITSIER-card22">
       <ion-item color="none" id="bITSIER-list-item19">

@@ -31,7 +31,7 @@ getObjectiveNews(){
 
      return new Promise(resolve => {
 
-       this.http.get('http://172.17.52.86:8500/news/012')
+       this.http.get('http://172.17.52.52:8500/news/012')
          .map(res => res.json())
          .subscribe(data => {
            this.objectiveNews = data;
