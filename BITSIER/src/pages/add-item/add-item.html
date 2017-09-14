@@ -16,65 +16,80 @@
 <ion-content padding>
     <div>
       <a style="display:block;" on-click="goToCaptureIncident()">
-        <img [src]="image" alt="Loading" style="display:block;width:80%;height:auto;margin-left:auto;margin-right:auto;" />
+        <img [src]="image||'./assets/img/flat,800x800,070,f.u2.jpg'" default ="./assets/img/flat,800x800,070,f.u2.jpg" alt="Loading" style="display:block;width:80%;height:auto;margin-left:auto;margin-right:auto;" />
       </a>
     </div>
     <div class="spacer" style="width:300px;height:14px;" id="describeIncident-spacer2"></div>
     <form id="describeIncident-form7" #registerForm="ngForm">
-      <ion-item id="describeIncident-range2">
-        <ion-range debounce="20" pin="true" min="10" max="100000" dualKnobs = "true" [(ngModel)]="price" (onChange)="view()" color="positive" name="Image_Size">
-          <ion-label range-left>
-            Image Quality
-          </ion-label>
-        </ion-range>
-      </ion-item>
+    <ion-item>
+      <ion-label>
+        Item name
+      </ion-label>
+      <ion-input type="text">
+
+      </ion-input>
+    </ion-item>
       <ion-item>
         <ion-label>
-          {{price}}
+          Price Range
         </ion-label>
+        <ion-input placeholder="Minimum "type="number" min ="1" max = "price.max" [(ngModel)]="price.min" name="min"  (ngModelChange)="changeMin($event)">
+        </ion-input>
+        <ion-input placeholder="Maximum"type="number" min={{price.min}} max="100000" [(ngModel)]="price.max" name="max"    (ngModelChange)="changeMax($event)">
+        </ion-input>
       </ion-item>
       <ion-item id="describeIncident-select1">
         <ion-label>
-          Incident Type
+          Item Condition
         </ion-label>
         <ion-select [(ngModel)]="incidentType" name="selects" required>
-          <ion-option>Fire
+          <ion-option>Brand New with Packaging
           </ion-option>
-          <ion-option>Flood
+          <ion-option>New without Packaging
           </ion-option>
-          <ion-option>Landslide
+          <ion-option>Refurbished
           </ion-option>
-          <ion-option>Other
+          <ion-option>Old and Working
           </ion-option>
         </ion-select>
       </ion-item>
       <ion-item id="describeIncident-textarea1">
         <ion-label>
-          Image Description
+          Item Description
         </ion-label>
         <ion-textarea [(ngModel)]="incidentDescription" name="describes" placeholder="Describe your image"></ion-textarea>
       </ion-item>
-      <div>
-      <ion-item *ngIf="manualLocation&&!isSelected" required>
+
+
+        <ion-item required *ngIf="!hasNoCategory">
       <ion-searchbar
+      placeholder="Search for Item Category"
+      autocorrect="on"
+      autocomplete="on"
+      debounce="100"
+      *ngIf="!hasNoCategory"
     [(ngModel)]="myInput"
     (ionInput)="filterItems()"
     [ngModelOptions]="{standalone: true}"
+    name="itemCategory"
     >
   </ion-searchbar>
-  <ion-list *ngFor="let item of fdata; let i = index">
+  <ion-list  *ngFor="let item of fdata; let i = index">
          <button ion-item  (click)="select_item(i)">
             {{item.toShow}}
           </button>
       </ion-list>
   </ion-item>
-  <ion-item *ngIf="manualLocation&&isSelected" (click)="reselect()">
+  <ion-item *ngIf="isSelected&&!hasNoCategory" (click)="reselect()">
     <div >
       {{this.selectedItem.toShow}}
     </div>
   </ion-item>
-  </div>
-      <button id="describeIncident-button7" ion-button color="positive" block (click)="call()" [disabled]="!(registerForm.form.valid&&locCheck)">
+  <ion-item>
+      <ion-label>Unlisted Category</ion-label>
+      <ion-checkbox name="checkbutton"[(ngModel)]="hasNoCategory"></ion-checkbox>
+    </ion-item>
+      <button id="describeIncident-button7" ion-button color="positive" block (click)="call()" [disabled]="!(registerForm.form.valid)">
         Submit
       </button>
     </form>

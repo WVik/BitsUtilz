@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { Item } from '../../models/item';
 /**
  * Generated class for the AddItemPage page.
  *
@@ -15,9 +15,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AddItemPage {
    public price={
-     "lower" : 1,
-     "upper" :2
+     "min" : 1,
+     "max" :10000
    };
+   hasNoCategory = false;
   // public ratio;
   // public ratioUpper;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
@@ -27,9 +28,24 @@ export class AddItemPage {
     console.log('ionViewDidLoad AddItemPage');
   }
   view(){
-    console.log(this.price.lower);
-    // console.log(this.ratio);
+        // console.log(this.ratio);
     // console.log(this.ratioUpper);
   }
+  changeMax(value){
+    if(this.price.max>100000)
+    this.price.max=100000;
+    if(this.price.max<1)
+    this.price.max=1;
+    if(this.price.max<this.price.min&&this.price.max)
+    this.price.min=this.price.max
 
+  }
+  changeMin(){
+    if(this.price.min<1)
+    this.price.min=1;
+    if(this.price.min>100000)
+    this.price.min=100000;
+    if(this.price.min>this.price.max&&this.price.min)
+    this.price.max=this.price.min
+  }
 }
