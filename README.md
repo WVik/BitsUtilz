@@ -13,5 +13,6 @@ This app also serves as a one-stop solution for campus-news.
 Build Instructions
 ----------------
 Navigate to BITSIER and run the following
-1) `ionic serve`
-2) `ionic cordova run`
+1) `npm install` 
+2) `ionic serve`
+3) `ionic cordova run`
